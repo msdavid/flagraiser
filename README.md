@@ -9,5 +9,5 @@ for the device to automatillly adjust the speed and the end points.
 
 [architecture](https://www.lucidchart.com/invitations/accept/66944ab0-6786-461c-a49b-2d910f306892)
 
-[flashin micropython](http://#)
+[flashin micropython](docs/micropython.md)
 
