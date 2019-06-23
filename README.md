@@ -2,7 +2,7 @@
 
 
 The device provides an opportunity for children with motor diabilities to raise a flag via a remote button.
-a simple proggraming mode allows the operators to adjust the height of the pole and the length of the song
+With a simple proggraming mode allows the operators to adjust the height of the pole and the length of the song
 for the device to automatillly adjust the speed and the end points. 
 
 ##Documentation:
