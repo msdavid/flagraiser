@@ -53,7 +53,7 @@ With Curl:
 curl -B -s -S -T boot.py ftp://micro:python@192.168.1.XXX/flash/
 
 
-### FLASHING THE LOLIN D32 ####
+###FLASHING THE LOLIN D32
 
 BUILD.sh flash fails
 I managed to flush the binaries as follows:
