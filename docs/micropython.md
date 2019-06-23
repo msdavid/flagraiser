@@ -1,5 +1,7 @@
 
-The Micropython firmware for Talktopus is MicroPython_ESP32_psRAM_LoBo https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/
+The flagraiser uses a ESP32 MCU with Micropython.
+
+The Micropython firmware is MicroPython_ESP32_psRAM_LoBo https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo/
 This distro contains the following services prebuilt:
 
 FTP Server
@@ -51,7 +53,7 @@ With Curl:
 curl -B -s -S -T boot.py ftp://micro:python@192.168.1.XXX/flash/
 
 
-### LOLIN D32 ####
+### FLASHING THE LOLIN D32 ####
 
 BUILD.sh flash fails
 I managed to flush the binaries as follows:
@@ -61,6 +63,3 @@ I managed to flush the binaries as follows:
 >esptool.py --chip esp32 -p /dev/ttyUSB0  write_flash -z 0x1000 bootloader/bootloader.bin 0xf000 phy_init_data.bin 0x10000 MicroPython.bin 0x8000 partitions_mpy.bin
 
 
-
-
- 
