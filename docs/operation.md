@@ -17,24 +17,23 @@ is at it lowest postion before turning all the device.
 
 ## Enrering Setting modes
 
-Start with the flag at its lowest position and turn on the device. 
-Using a clip press the middle button through the pinhole once, the  
-blue LED will start to blink at a slow pace (once a second), now 
-the device is in Pole-Lenght setting mode. 
-Using the UP button, bring the flag to the top of the pole (DOWN 
-button cn be used for fine adjustments). 
-Once you are satified with the end position press the middle button 
+* Start with the flag at its lowest position and turn on the device.  
+* Using a clip press the middle button (SET) through the pinhole once.  
+* The blue LED will start to blink at a slow pace (once a second).  
+* Now the device is in Pole-Lenght setting mode.   
+* Using the UP button, bring the flag to the top of the pole (the DOWN  
+button can be used for fine adjustments). 
+* Once you are satified with the end position press the middle button 
 through the pinhole once to save the position. 
-The flag will return dow to zero automaticall and the LED will now 
+* The flag will return down to zero automatically and the LED will now 
 flash rapidly (4 times a second) indicating that the device is now 
 in Song-Lengh setting mode. 
-Start the song on a music player and press the DOWN button once when 
-the song has started and press the DOWN button one more time at the 
-end of the song.
-The LED will return to solid indicating that the Song-Lenght and 
+* Start the song on a music player and press the DOWN button once when 
+the song has started
+* Press the DOWN button one more time at the end of the song.
+* The LED will return to solid indicating that the Song-Lenght and 
 Pole-length have been saved.
+
 The device will save the settings in its flash memory and reuse them
 when turned on.
-
-
 
