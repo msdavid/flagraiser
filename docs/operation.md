@@ -1,8 +1,7 @@
 # FlagRaiser V1.0 configuration
 
 The device has three 3 buttons:  UP - SET - DOWN 
-
-[Image](Buttons.jpeg)
+![Image](Buttons.jpeg)
 
 ## Modes
 1. Operational [solid blue led]
