@@ -38,3 +38,5 @@ Pole-length have been saved.
 The device will save the settings in its flash memory and reuse them
 when turned on.
 
+![Image](connectors.jpeg)
+
