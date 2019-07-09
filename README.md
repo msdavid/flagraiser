@@ -12,5 +12,6 @@ for the device to automatillly adjust the speeds and the end points.
 * [How to Flush micropython](docs/micropython.md)
 * [Cabling](docs/cabling.md)
 * [3D parts](3d)
+* [Software](docs/micropython.md)
 
 
