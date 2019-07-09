@@ -1,7 +1,8 @@
+# FlagRaiser V1.0 configuration
 
-The device consist of 4 buttons UP - SET - DOWN
+The device has three 3 buttons:  UP - SET - DOWN
 
-#modes
+## Modes
 1. Operational [solid blue led]
 2. Setting mode
  a. Pole lengh setting [slow blinking blue led]
@@ -14,9 +15,9 @@ that the HOME postion (position zero) becomes the point at wich the
 device was wen turned on. Before every use ensure that the flag 
 is at it lowest postion before turning all the device.
 
-#Enrering Setting modes
+## Enrering Setting modes
 
-Start with the flag at its lowest position and turn on the device.
+Start with the flag at its lowest position and turn on the device. 
 Using a clip press the middle button through the pinhole once, the  
 blue LED will start to blink at a slow pace (once a second), now 
 the device is in Pole-Lenght setting mode. 
