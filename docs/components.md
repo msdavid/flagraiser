@@ -10,3 +10,5 @@
 * 3 x Tactile Switch 
 	* https://sg.rs-online.com/web/p/tactile-switches/4791508/
 * 1 x NEMA 17 200 stp/rev - stepper motor
+
+![image](Inside.jpeg)
