@@ -5,8 +5,8 @@ The device has three 3 buttons:  UP - SET - DOWN
 ## Modes
 1. Operational [solid blue led]
 2. Setting mode
- a. Pole lengh setting [slow blinking blue led]
- b. Song lenght setting [fast blinking blue led]
+* Pole lengh setting [slow blinking blue led]
+* Song lenght setting [fast blinking blue led]
 
 Upon turn on, the device defaults to Operational mode. 
 In this (standard) mode the button UP will comence the flag raising  
