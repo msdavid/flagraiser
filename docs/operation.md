@@ -1,6 +1,6 @@
 # FlagRaiser V1.0 configuration
 
-The device has three 3 buttons:  UP/DOWN - SET - RESET 
+The device has three 3 buttons:  START - SET - RESET 
 ![Image](Buttons.jpeg)
 
 ## Modes
@@ -23,19 +23,18 @@ The device has three 3 buttons:  UP/DOWN - SET - RESET
 The power switch has three positions - Up, Down and Off.  
 **Important:** before turning the switch ensure that the flag is at it lowest postion (for raising) or highest position (for lowering).  
 Upon turn on, the device defaults to Operational mode in either up or down directions. 
-In this (operational) mode the button UP/DOWN will comence the flag raising/lowering  
+In this (operational) mode the button START will comence the flag raising/lowering  
 at a speed based on previous settings of Pole and Song length. Note  
 that the HOME postion (position zero) becomes the point at which the 
 device was when turned on (either at the top of the mast or at the lowest end). 
 
 
-## Enrering Setting modes
+## Entering Setting modes
 
 * Start with the flag at its lowest position and turn on the power switch to the UP position.  
 * Using a clip press the middle button (SET) through the pinhole.  
 * The LED will start blinking green. Now the device is in Pole-Lenght setting mode.   
-* Using the UP button, bring the flag to the top of the pole (the DOWN  
-button can be used for fine adjustments). 
+* Using the START button, bring the flag to the top of the pole. 
 * Once you are satified with the end (top) position press the middle button 
 through the pinhole one more time to save the length of the pole. 
 * The flag will return down to zero automatically and the LED will now 
