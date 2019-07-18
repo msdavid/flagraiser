@@ -3,13 +3,17 @@ from time import ticks_ms, sleep_ms
 from sys import exit
 #Buttons
 UP_PIN = 13
-DW_PIN = 14
+RW_PIN = 14
 ST_PIN = 12
 #Stepper
 DIR_PIN = 21
 STP_PIN = 22
 #LED
-LED_PIN = 32
+LED_PIN_RED = 32
+LED_PIN_GREEN = 26
+
+# Flag Direction Switch (And Power)
+CTL_PIN = 33
 
 #globals
 SET_MODE = 'operational'
@@ -31,8 +35,8 @@ def up_action(pin, value):
         print('Motor Position: %s' % motor.position)
         motor.stop()
 
-def dw_action(pin, value):
-    global MEASURING, START_MEASURE
+def rew_action(pin, value):
+    global MEASURING, START_MEASURE 
     print('DOWN button pressed', value)
     if value:
         if SET_MODE == 'length':
@@ -41,17 +45,19 @@ def dw_action(pin, value):
                 MEASURING = True
                 START_MEASURE = ticks_ms()
                 print('Starting song length measurment')
+                led.rblink(20)
                 return
             if MEASURING:
                 motor.song_length = ticks_ms() - START_MEASURE
                 print('End of song measurement - length:%s ms' % motor.song_length)
                 MEASURING = False
+                led.rblink()
                 return
-
-        # moving the motor
-        motor.freq = motor.default_freq # when down use always default speed
+        # rewind
+        motor.freq = motor.default_freq # rewind at full speed
         motor.set_direction(0)
         motor.start()
+
     else:
         print('DOWN button released')
         print('Motor Position: %s' % motor.position)
@@ -68,7 +74,7 @@ def st_action(pin, value):
             motor.max_position = 1000000 #infinite
             motor.position = 1
             SET_MODE = 'height'
-            led.blink()
+            led.gblink()
             return
 
         if SET_MODE == 'height':
@@ -81,11 +87,12 @@ def st_action(pin, value):
             fp.flush()
             fp.close()
             print('Pole height stored')
+            motor.update_freq(motor.max_freq)
             motor.set_direction(0)
             motor.start()
             SET_MODE = 'length'
             motor.store_song_length = motor.song_length
-            led.blink(4)
+            led.rblink()
             return
 
         if SET_MODE == 'length':
@@ -99,7 +106,7 @@ def st_action(pin, value):
                 motor.song_length = motor.store_song_length
             motor.update_freq()
             SET_MODE = 'operational'
-            led.on()
+            led.green()
     else:
         print('Setting mode button released', SET_MODE, value )
 
@@ -122,11 +129,14 @@ class Stepper:
         self.store_song_length = 0
         self.default_freq = 3000
         self.max_freq = 5000
-        self.min_freq = 100
+        self.direction = 1
+        self.min_freq = 500
         self.freq = self.get_freq(self.song_length)
         self.store_position = 0
         self.min_store_position = 4000 # 5 revs
         self.started_rising = 0 # stores the time the flag started rising
+        self.motor = PWM(self.stp_pin, duty=0, timer=0)
+        self.freq_init()
 
     def get_period(self, steps):
         return abs(int(round(steps/self.freq * 1000)))
@@ -152,12 +162,13 @@ class Stepper:
             period = self.get_period(self.position)
         if period > 0:
             self.start_time = ticks_ms()
-            self.motor = PWM(self.stp_pin, freq=self.freq, duty=50)
+            self.motor.init(freq=self.freq, duty=50)
             self.timer.init(mode=Timer.ONE_SHOT, period=period, callback=self.stop)
 
     def stop(self, arg=None):
         if not self.moving: return
         self.motor.deinit()
+        Pin(STP_PIN, Pin.OUT) #nasty bug with the PWD timers/channel Motor steps 
         self.stop_time = ticks_ms()
         self.moving = False
         self.timer.deinit()
@@ -174,8 +185,24 @@ class Stepper:
                 self.update_freq()
 
     def set_direction(self, dir):
-        self.dir_pin.value(dir)
         self.direction = dir
+        if not ct.value(): #(Change the motor direction to lower the flag)
+            dir = 1 - dir
+        self.dir_pin.value(dir)
+
+    def freq_init(self):
+        max_position = open('max_position').read()
+        song_length = open('song_length').read()
+        print('max_position:', max_position)
+        print('song_length:', song_length)
+        if max_position:
+            self.max_position = int(str(max_position))
+        if song_length:
+            self.song_length = int(str(song_length))
+
+        # set the new motor speed
+        self.update_freq()
+
 
 class Switch:
     def __init__(self, pin, callback):
@@ -193,37 +220,41 @@ class Switch:
             self.last = value
 
 class Led:
-    def __init__(self, pin):
-        self.pin = Pin(pin)
-        self.led = PWM(self.pin, freq=1, duty=0)
+    def __init__(self, rpin, gpin):
+        self.rpin = Pin(rpin)
+        self.gpin = Pin(gpin)
+        self.rled = PWM(self.rpin, freq=1, duty=0, timer=1)
+        self.gled = PWM(self.gpin, freq=1, duty=0, timer=2)
 
-    def blink(self, freq=1, duty=50):
-        self.led.init(freq=freq, duty=duty)
+    def rblink(self, freq=1, duty=50):
+        self.rled.init(freq=freq, duty=duty, timer=1)
+        self.gled.deinit()
 
-    def on(self):
-        self.led.init(freq=1, duty=100)
+    def gblink(self, freq=1, duty=50):
+        self.gled.init(freq=freq, duty=duty, timer=2)
+        self.rled.deinit()
 
+    def red(self):
+        self.rled.init(freq=1, duty=100, timer=1)
+        self.gled.deinit()
+
+    def green(self):
+        self.gled.init(freq=1, duty=100, timer=2)
+        self.rled.deinit()
+    
     def off(self):
-        self.led.deinit()
+        self.rled.deinit()
+        self.gled.deinit()
 
 up = Switch(UP_PIN, up_action)
-dw = Switch(DW_PIN, dw_action)
+rw = Switch(RW_PIN, rew_action)
 st = Switch(ST_PIN, st_action)
+ct = Pin(CTL_PIN, Pin.IN, Pin.PULL_UP) 
+led = Led(LED_PIN_RED, LED_PIN_GREEN)
 
-led = Led(LED_PIN)
-led.on()
+if ct.value():
+    led.green()
+else:
+    led.red()
 
 motor = Stepper(DIR_PIN, STP_PIN)
-max_position = open('max_position').read()
-song_length = open('song_length').read()
-print('max_position:', max_position)
-print('song_length:', song_length)
-
-if max_position:
-    motor.max_position = int(str(max_position))
-
-if song_length:
-    motor.song_length = int(str(song_length))
-
-# set the new motor speed
-motor.update_freq()
