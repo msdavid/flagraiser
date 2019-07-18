@@ -5,11 +5,11 @@ The device has three 3 buttons:  START - SET - RESET
 
 ## Modes
 1. Operational 
-  UP [LED: solid green]
-  DOWN [LED: solid red]
+  UP
+  DOWN
 2. Setting mode  
-   Pole lengh setting [LED: slow blinking green]  
-   Song lenght setting [LED: slow blinking red]
+   Pole lengh setting
+   Song lenght setting
    
 ## LED status indicator
 * Solid GREEN: Ready to raise the flag up
