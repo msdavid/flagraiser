@@ -21,7 +21,7 @@ The device has three 3 buttons:  UP/DOWN - SET - RESET
 
 ## Operational Mode
 The power switch has three positions - Up, Down and Off.  
- Important: *before* turning the switch ensure that the flag is at it lowest postion (for raising) or highest position (for lowering).  
+**Important:** before turning the switch ensure that the flag is at it lowest postion (for raising) or highest position (for lowering).  
 Upon turn on, the device defaults to Operational mode in either up or down directions. 
 In this (operational) mode the button UP/DOWN will comence the flag raising/lowering  
 at a speed based on previous settings of Pole and Song length. Note  
